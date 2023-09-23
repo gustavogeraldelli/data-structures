@@ -95,7 +95,7 @@ struct node* get_min(struct node *root) {
     return get_min(root->left);
 }
 
-struct node*_delete(struct node *root, T data) {
+struct node* _delete(struct node *root, T data) {
     if (!root)
         return NULL;
     
