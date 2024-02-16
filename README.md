@@ -1,5 +1,5 @@
 # About
-These implementation were made during the data structure class at college.
+These implementations were made during data structures classes at college.
 
 # Missing
 - Hash Table
