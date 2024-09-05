@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include "list.h"
-#include <stdio.h>
 
 list* init_list() {
     list *l = (list*)malloc(sizeof(list));
