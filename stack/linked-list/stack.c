@@ -1,7 +1,17 @@
 #include <stdlib.h>
 #include "stack.h"
 
-stack* init_stack() {
+struct node {
+    T data;
+    struct node *next;
+};
+
+struct stack {
+    struct node *top;
+    int size;
+};
+
+stack* new_stack() {
     stack *s = (stack*)malloc(sizeof(stack));
     if (s) {
         s->top = NULL;

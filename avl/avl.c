@@ -1,19 +1,34 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "avl.h"
 
-void avl_init(avl *tree) {
-    tree->root = NULL;
+struct node {
+    T data;
+    struct node *left, *right;
+    int height;
+};
+
+struct avl {
+    struct node *root;
+};
+
+avl* new_avl() {
+    avl *tree = (avl*)malloc(sizeof(avl));
+    if (tree)
+        tree->root = NULL;
+    return tree;
 }
 
-void _avl_free(struct node *root) {
+void _free_avl(struct node *root) {
     if (!root) return;
-    _avl_free(root->left);
-    _avl_free(root->right);
+    _free_avl(root->left);
+    _free_avl(root->right);
     free(root);
 }
 
-void avl_free(avl *tree) {
-    _avl_free(tree->root);
+void free_avl(avl *tree) {
+    if (!tree) return;
+    _free_avl(tree->root);
 }
 
 struct node* new_node(T data) {
@@ -56,14 +71,14 @@ struct node* right_rotate(struct node *n) {
     return left_node;
 }
 
-struct node* _insert(struct node *root, T data) {
+struct node* _insert_avl(struct node *root, T data) {
     if (!root)
         return new_node(data);
     
     if (data < root->data)
-        root->left = _insert(root->left, data);
+        root->left = _insert_avl(root->left, data);
     else if (data > root->data)
-        root->right = _insert(root->right, data);
+        root->right = _insert_avl(root->right, data);
     else
         return root;
     
@@ -85,8 +100,9 @@ struct node* _insert(struct node *root, T data) {
     return root;
 }
 
-void insert(avl *tree, T data) {
-    tree->root = _insert(tree->root, data);
+void insert_avl(avl *tree, T data) {
+    if (!tree) return;
+    tree->root = _insert_avl(tree->root, data);
 }
 
 struct node* get_min(struct node *root) {
@@ -95,7 +111,7 @@ struct node* get_min(struct node *root) {
     return get_min(root->left);
 }
 
-struct node* _delete(struct node *root, T data) {
+struct node* _delete_avl(struct node *root, T data) {
     if (!root)
         return NULL;
     
@@ -117,13 +133,13 @@ struct node* _delete(struct node *root, T data) {
         else {
             struct node* n = get_min(root->right);
             root->data = n->data;
-            root->right = _delete(root->right, n->data);
+            root->right = _delete_avl(root->right, n->data);
         }
     }
     else if (data < root->data)
-        root->left = _delete(root->left, data);
+        root->left = _delete_avl(root->left, data);
     else
-        root->right = _delete(root->right, data);
+        root->right = _delete_avl(root->right, data);
 
     if (!root)
         return root;
@@ -146,23 +162,39 @@ struct node* _delete(struct node *root, T data) {
     return root;
 }
 
-void delete(avl *tree, T data) {
-    tree->root = _delete(tree->root, data);
+void delete_avl(avl *tree, T data) {
+    if (!tree) return;
+    tree->root = _delete_avl(tree->root, data);
 }
 
-int _search(struct node *root, T key) {
+int _search_avl(struct node *root, T key) {
     if (!root)
         return 0;
 
     if (key == root->data)
         return 1;
     else if (key < root->data)
-        return _search(root->left, key);
+        return _search_avl(root->left, key);
     else if (key > root->data)
-        return _search(root->right, key);
+        return _search_avl(root->right, key);
 
 }
 
-int search(avl *tree, T key) {
-    return _search(tree->root, key);
+int search_avl(avl *tree, T key) {
+    if (!tree) return 0;
+    return _search_avl(tree->root, key);
+}
+
+void _post_order_avl(struct node *root) {
+	if (!root)
+		return;
+	_post_order_avl(root->left);
+	_post_order_avl(root->right);
+	printf("%d ", root->data);
+}
+
+void post_order_avl(avl *tree) {
+    if (!tree) return;
+    _post_order_avl(tree->root);
+    printf("\n");
 }

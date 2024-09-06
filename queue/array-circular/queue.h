@@ -1,17 +1,11 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#define MAX 100
-
 typedef int T;
 
-typedef struct {
-    T *arr;
-    int front, rear;
-    int size;
-} queue;
+typedef struct queue queue;
 
-queue* init_queue();
+queue* new_queue(int max_size);
 void free_queue(queue *q);
 int empty(queue *q);
 int full(queue *q);

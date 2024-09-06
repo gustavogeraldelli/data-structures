@@ -3,17 +3,9 @@
 
 typedef int T;
 
-struct node {
-    T data;
-    struct node *next;
-};
+typedef struct queue queue;
 
-typedef struct {
-    struct node *front, *rear;
-    int size;
-} queue;
-
-queue* init_queue();
+queue* new_queue();
 void free_queue(queue *q);
 int empty(queue *q);
 int size(queue *q);

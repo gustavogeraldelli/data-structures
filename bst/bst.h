@@ -3,19 +3,13 @@
 
 typedef int T;
 
-struct node {
-    T data;
-    struct node *left, *right;
-};
+typedef struct bst bst;
 
-typedef struct {
-    struct node *root;
-} bst;
-
-void bst_init(bst *tree);
-void bst_free(bst *tree);
-void insert(bst *tree, T data);
-void delete(bst *tree, T data);
-int search(bst *tree, T key);
+bst* new_bst();
+void free_bst(bst *tree);
+void insert_bst(bst *tree, T data);
+void delete_bst(bst *tree, T data);
+int search_bst(bst *tree, T key);
+void post_order_bst(bst *tree);
 
 #endif

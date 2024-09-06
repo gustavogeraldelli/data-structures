@@ -3,7 +3,7 @@
 #include "stack.h"
 
 int main() {
-	stack *s = init_stack();
+	stack *s = new_stack();
 
     push(s, 5);
     push(s, 4);

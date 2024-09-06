@@ -3,13 +3,9 @@
 
 typedef int T;
 
-typedef struct {
-    T *arr;
-    int top;
-    int max;
-} stack;
+typedef struct stack stack;
 
-stack* init_stack();
+stack* new_stack();
 void free_stack(stack *s);
 int empty(stack *s);
 int full(stack *s);

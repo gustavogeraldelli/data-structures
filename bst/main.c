@@ -2,25 +2,16 @@
 #include <stdlib.h>
 #include "bst.h"
 
-void post_order(struct node *root) {
-	if (!root)
-		return;
-	post_order(root->left);
-	post_order(root->right);
-	printf("%d\n", root->data);
-}
-
 int main() {
-	bst tree;
-	bst_init(&tree);
+	bst *tree = new_bst();
 
-	insert(&tree, 10);
-	insert(&tree, 5);
-	insert(&tree, 15);
-	insert(&tree, 2);
-	insert(&tree, 8);
-	insert(&tree, 11);
-	insert(&tree, 19);
+	insert_bst(tree, 10);
+	insert_bst(tree, 5);
+	insert_bst(tree, 15);
+	insert_bst(tree, 2);
+	insert_bst(tree, 8);
+	insert_bst(tree, 11);
+	insert_bst(tree, 19);
 
 	/*
 			10
@@ -30,10 +21,10 @@ int main() {
 		2   8 11 19
 	*/
 	
-	post_order(tree.root);
-
-	delete(&tree, 8);
-	delete(&tree, 15);
+	post_order_bst(tree);
+	
+	delete_bst(tree, 8);
+	delete_bst(tree, 15);
 
 	/*
 			10
@@ -43,8 +34,8 @@ int main() {
 		2    11
 	*/
 
-	post_order(tree.root);
+	post_order_bst(tree);
 
-	bst_free(&tree);
+	free_bst(tree);
     return 0;
 }

@@ -2,16 +2,8 @@
 #include <stdlib.h>
 #include "list.h"
 
-void print_list(list *l) {
-    struct node *n = l->sentinel->next;
-    while (n != l->sentinel) {
-        printf("%d\n", n->data);
-        n = n->next;
-    }
-}
-
 int main() {
-    list *l = init_list();
+    list *l = new_list();
 
     push_back(l, 10);
     push_front(l, 44);

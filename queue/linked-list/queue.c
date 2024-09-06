@@ -1,7 +1,17 @@
 #include <stdlib.h>
 #include "queue.h"
 
-queue* init_queue() {
+struct node {
+    T data;
+    struct node *next;
+};
+
+struct queue {
+    struct node *front, *rear;
+    int size;
+};
+
+queue* new_queue() {
     queue *q = (queue*)malloc(sizeof(queue));
     if (q) {
         q->front = q->rear = NULL;

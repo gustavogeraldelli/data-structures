@@ -3,7 +3,7 @@
 #include "queue.h"
 
 int main() {
-    queue *q = init_queue();
+    queue *q = new_queue(50);
     
     enqueue(q, 1);
     enqueue(q, 2);

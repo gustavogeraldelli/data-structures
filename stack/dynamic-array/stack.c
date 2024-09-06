@@ -1,7 +1,13 @@
 #include <stdlib.h>
 #include "stack.h"
 
-stack* init_stack() {
+typedef struct stack {
+    T *arr;
+    int top;
+    int max;
+} stack;
+
+stack* new_stack() {
     stack *s = (stack*)malloc(sizeof(stack));
     if (s) {
         s->arr = malloc(sizeof(T) * 2);

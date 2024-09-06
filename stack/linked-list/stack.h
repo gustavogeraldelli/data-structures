@@ -3,17 +3,9 @@
 
 typedef int T;
 
-struct node {
-    T data;
-    struct node *next;
-};
+typedef struct stack stack;
 
-typedef struct {
-    struct node *top;
-    int size;
-} stack;
-
-stack* init_stack();
+stack* new_stack();
 void free_stack(stack *s);
 int empty(stack *s);
 int size(stack *s);

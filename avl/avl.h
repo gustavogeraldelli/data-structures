@@ -2,21 +2,13 @@
 #define AVL_H
 
 typedef int T;
+typedef struct avl avl;
 
-struct node {
-    T data;
-    struct node *left, *right;
-    int height;
-};
-
-typedef struct {
-    struct node *root;
-} avl;
-
-void avl_init(avl *tree);
-void avl_free(avl *tree);
-void insert(avl *tree, T data);
-void delete(avl *tree, T data);
-int search(avl *tree, T key);
+avl* new_avl();
+void free_avl(avl *tree);
+void insert_avl(avl *tree, T data);
+void delete_avl(avl *tree, T data);
+int search_avl(avl *tree, T key);
+void post_order_avl(avl *tree);
 
 #endif

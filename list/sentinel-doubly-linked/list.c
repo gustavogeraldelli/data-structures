@@ -1,13 +1,25 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
 
-list* init_list() {
+struct node {
+    T data;
+    struct node *next, *prev;
+};
+
+struct list {
+    struct node *sentinel;
+    int size;
+};
+
+list* new_list() {
     list *l = (list*)malloc(sizeof(list));
     struct node *n = (struct node*)malloc(sizeof(struct node));
     if (l) {
         n->next = n->prev = l->sentinel = n;
         l->size = 0;
     }
+    return l;
 }
 
 void free_list(list *l) {
@@ -90,4 +102,14 @@ int last(list *l, T *r) {
     if (!l || empty(l)) return 0;
     *r = l->sentinel->prev->data;
     return 1;
+}
+
+void print_list(list *l) {
+    if (!l || empty(l)) return;
+    struct node *n = l->sentinel->next;
+    while (n != l->sentinel) {
+        printf("%d ", n->data);
+        n = n->next;
+    }
+    printf("\n");
 }

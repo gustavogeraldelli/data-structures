@@ -3,17 +3,9 @@
 
 typedef int T;
 
-struct node {
-    T data;
-    struct node *next, *prev;
-};
+typedef struct list list;
 
-typedef struct {
-    struct node *head;
-    int size;
-} list;
-
-list* init_list();
+list* new_list();
 void free_list(list *l);
 int empty(list *l);
 int size(list *l);
@@ -23,5 +15,6 @@ int pop_front(list *l, T *r);
 int pop_back(list *l, T *r);
 int first(list *l, T *r);
 int last(list *l, T *r);
+void print_list(list *l);
 
 #endif

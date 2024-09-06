@@ -1,7 +1,18 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
 
-list* init_list() {
+struct node {
+    T data;
+    struct node *next;
+};
+
+struct list {
+    struct node *head, *tail;
+    int size;
+};
+
+list* new_list() {
     list *l = (list*)malloc(sizeof(list));
     if (l) {
         l->head = NULL;
@@ -100,4 +111,14 @@ int last(list *l, T *r) {
     if (!l || empty(l)) return 0;
     *r = l->tail->data;
     return 1;
+}
+
+void print_list(list *l) {
+    if (!l || empty(l)) return;
+    struct node *n = l->head;
+    while (n) {
+        printf("%d ", n->data);
+        n = n->next;
+    }
+    printf("\n");
 }

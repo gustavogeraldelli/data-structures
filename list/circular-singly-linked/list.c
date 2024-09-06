@@ -1,18 +1,30 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "list.h"
 
-list* init_list() {
+struct node {
+    T data;
+    struct node *next;
+};
+
+struct list {
+    struct node *tail;
+    int size;
+};
+
+list* new_list() {
     list *l = (list*)malloc(sizeof(list));
     if (l) {
         l->tail = NULL;
         l->size = 0;
     }
+    return l;
 }
 
 void free_list(list *l) {
     if (!l) return;
     while (!empty(l))
-        pop_back(l, NULL);
+        pop_front(l, NULL);
     free(l);
 }
 
@@ -48,15 +60,13 @@ int push_back(list *l, T data) {
     if (!l || !n)
         return 0;
     n->data = data;
-    if (empty(l)) {
+    if (empty(l))
         n->next = n;
-        l->tail = n;
-    }
     else {
         n->next = l->tail->next;
         l->tail->next = n;
-        l->tail = n;
     }
+    l->tail = n;
     l->size++;
     return 1;
 }
@@ -106,4 +116,15 @@ int last(list *l, T *r) {
     if (!l || empty(l)) return 0;
     *r = l->tail->data;
     return 1;
+}
+
+void print_list(list *l) {
+    if (!l || empty(l)) return;
+    struct node *n = l->tail->next;
+    while (1) {
+        printf("%d ", n->data);
+        n = n->next;
+        if (n == l->tail->next) break;
+    }
+    printf("\n");
 }
